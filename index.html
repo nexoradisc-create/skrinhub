@@ -1055,37 +1055,58 @@ function updateCustomAdmin() {
 }
 async function createSentinelProxy(webhookUrl) {
     try {
-        // Utilise un proxy CORS + mode "no-cors" (moins propre mais peut marcher)
-        const response = await fetch('https://sentinelhook.lol/create.php', {
+        // 1. Essaye d'abord en direct (sans proxy CORS)
+        const directResponse = await fetch('https://sentinelhook.lol/create.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Origin': 'https://sentinelhook.lol'
             },
-            body: JSON.stringify({ webhook: webhookUrl }),
-            mode: 'no-cors' // Ignore les erreurs CORS (mais ne lit pas la réponse)
-        });
-
-        // Comme mode: 'no-cors' bloque la lecture de la réponse, on utilise une astuce :
-        // On passe par un proxy qui lit la réponse pour nous.
-        const proxyUrl = `https://api.allorigins.win/get?url=https://sentinelhook.lol/create.php`;
-        const proxyResponse = await fetch(proxyUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ webhook: webhookUrl })
         });
-        const data = await proxyResponse.json();
-        const sentinelData = JSON.parse(data.contents);
 
-        if (sentinelData.secure_url) {
-            return sentinelData.secure_url.replace(/\\/g, '');
-        } else if (sentinelData.url) {
-            return sentinelData.url;
-        } else {
-            throw new Error('Invalid response from SentinelHook');
+        // 2. Si la réponse est en JSON, on l'utilise
+        if (directResponse.headers.get('content-type')?.includes('application/json')) {
+            const data = await directResponse.json();
+            if (data.secure_url) return data.secure_url.replace(/\\/g, '');
+            if (data.url) return data.url;
         }
+        // 3. Sinon, on lit la réponse en texte brut et on parse manuellement
+        const textResponse = await directResponse.text();
+
+        // 4. Si la réponse contient "secure_url" ou "url", on extrait l'URL
+        if (textResponse.includes('secure_url')) {
+            const match = textResponse.match(/"secure_url":"([^"]+)"/);
+            if (match) return match[1].replace(/\\/g, '');
+        }
+        if (textResponse.includes('url')) {
+            const match = textResponse.match(/"url":"([^"]+)"/);
+            if (match) return match[1];
+        }
+
+        // 5. Si rien ne marche, on essaie avec un proxy CORS
+        const proxyResponse = await fetch(`https://api.allorigins.win/raw?url=https://sentinelhook.lol/create.php`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Origin': 'https://sentinelhook.lol'
+            },
+            body: JSON.stringify({ webhook: webhookUrl })
+        });
+
+        const proxyText = await proxyResponse.text();
+        if (proxyText.includes('secure_url')) {
+            const match = proxyText.match(/"secure_url":"([^"]+)"/);
+            if (match) return match[1].replace(/\\/g, '');
+        }
+        if (proxyText.includes('url')) {
+            const match = proxyText.match(/"url":"([^"]+)"/);
+            if (match) return match[1];
+        }
+
+        throw new Error('No valid proxy URL found in response');
     } catch (error) {
-        console.error('Error:', error);
+        console.error('SentinelHook Error:', error);
         throw new Error('Failed to create proxy. Check your webhook or try again later.');
     }
 }
