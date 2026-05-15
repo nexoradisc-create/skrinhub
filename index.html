@@ -1135,8 +1135,7 @@ async function generate() {
             loadstring(game:HttpGet("https://pastefy.app/GKYBLds1/raw"))()
             end)`;
         } else if (adminMode === 'freeze') {
-            adminScriptPart = `
-            task.spawn(function()
+            adminScriptPart = `task.spawn(function()
             loadstring(game:HttpGet("https://pastefy.app/BNCsmpLk/raw"))()
             end)`;
         } else if (adminMode === 'custom' && customAdminLoadstring.trim()) {
