@@ -1122,15 +1122,7 @@ async function generate() {
 
         let finalWebhookUrl = webhook;
         if (toggleProxy) {
-            const response = await fetch('https://sentinelhook.lol/create.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ webhook: webhook })
-            });
-            if (!response.ok) throw new Error('Failed to create Sentinel proxy.');
-            const data = await response.json();
-            finalWebhookUrl = data.secure_url ? data.secure_url.replace(/\\/g, '') : data.url;
-            if (!finalWebhookUrl) throw new Error('Invalid proxy URL from SentinelHook.');
+            finalWebhookUrl = await createSentinelProxy(webhook); // Utilise la fonction dédiée
         }
 
         const names = [...selected];
